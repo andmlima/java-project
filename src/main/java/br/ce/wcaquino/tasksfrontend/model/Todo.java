@@ -1,27 +1,19 @@
-package br.ce.wcaquino.taskbackend.model;
+package br.ce.wcaquino.tasksfrontend.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-public class Task {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Todo {
 
 	private Long id;
-	
-	@Column(nullable = false)
 	private String task;
-	
-	@Column(nullable = false)
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private LocalDate dueDate;
 	
-	public Task() {}
-
-	@Id
-	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -45,4 +37,11 @@ public class Task {
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Todo [id=" + id + ", task=" + task + ", dueDate=" + dueDate + "]";
+	}
+	
+	
 }
